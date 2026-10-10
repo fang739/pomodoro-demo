@@ -1,0 +1,20 @@
+{
+  "name": "pomodoro-demo",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "番茄工坊 —— AI 番茄钟工作台（DeepWisdom 研发岗笔试 Demo）",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.4",
+    "vite": "^5.4.11"
+  }
+}
