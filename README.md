@@ -95,16 +95,18 @@ npm run preview    # 本地预览构建产物
 
 ---
 
-## 五、接入真实 Claude API（扩展点说明）
+## 五、接入真实 Claude API（扩展点已就绪）
 
-1. 在 Vercel 项目里新建一个 serverless 函数（如 `api/plan.js`），内部读取环境变量 `ANTHROPIC_API_KEY`，调用 Claude Messages API，返回 `{ tasks: [{ title, estimatedPomodoros }] }` 或 `{ text }`。
-2. 前端根目录新建 `.env.local`：
+`api/plan.js` 已经写好并放在项目里（Vercel Serverless 函数，用 `@anthropic-ai/sdk` 调 `claude-opus-4-8`）。你只需两步：
+
+1. 部署到 Vercel 后，在项目设置里加一个环境变量：`ANTHROPIC_API_KEY = <你的 Key>`（Key 只存在 Vercel 服务端，绝不进前端/仓库）。
+2. 本地根目录新建 `.env.local`：
 
    ```bash
    VITE_AI_ENDPOINT=/api/plan
    ```
 
-3. 无需改任何业务代码，`src/lib/ai.js` 会自动切换到真实 AI 路径，界面徽标从「本地模板」变为「AI 生成」。
+3. 无需改任何业务代码，`src/lib/ai.js` 会自动切换到真实 AI 路径，界面徽标从「本地模板」变为「AI 生成」。没配 Key 或 API 报错时自动降级回本地启发式。
 
 ---
 
@@ -122,6 +124,8 @@ npm run preview    # 本地预览构建产物
 ```
 pomodoro-demo/
 ├── public/favicon.svg
+├── api/
+│   └── plan.js                 # Vercel serverless：Claude API 代理
 ├── src/
 │   ├── main.jsx                 # 入口
 │   ├── App.jsx                  # 主逻辑：状态编排 + 记账
