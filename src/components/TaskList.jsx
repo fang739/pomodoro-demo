@@ -56,6 +56,7 @@ export default function TaskList({
   onDelete,
   onSetActive,
   onUpdateEstimate,
+  onClearDone,
 }) {
   const [title, setTitle] = useState('')
   const [estimate, setEstimate] = useState(1)
@@ -128,7 +129,12 @@ export default function TaskList({
             </ul>
           )}
           {finished.length > 0 && (
-            <div className="task-finished-head">已完成 {finished.length}</div>
+            <div className="task-finished-head">
+              <span>已完成 {finished.length}</span>
+              <button className="task-clear-done" onClick={onClearDone}>
+                清空
+              </button>
+            </div>
           )}
           {finished.length > 0 && (
             <ul className="task-group task-group-finished">

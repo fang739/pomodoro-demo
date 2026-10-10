@@ -175,6 +175,10 @@ export default function App() {
     [setTasks],
   )
 
+  const clearDone = useCallback(() => {
+    setTasks((prev) => prev.filter((t) => !t.done))
+  }, [setTasks])
+
   const finishOnboarding = useCallback(() => setOnboardingSeen(true), [setOnboardingSeen])
 
   const todayKey = dateKey()
@@ -219,6 +223,7 @@ export default function App() {
               onDelete={deleteTask}
               onSetActive={setActiveTask}
               onUpdateEstimate={updateEstimate}
+              onClearDone={clearDone}
             />
           </div>
 
